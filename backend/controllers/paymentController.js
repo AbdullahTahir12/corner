@@ -1,53 +1,29 @@
-import crypto from 'crypto';
-import Razorpay from 'razorpay';
+import Stripe from 'stripe';
 
 const config = (req, res) =>
   res.send({
-    razorpayKeyId: process.env.RAZORPAY_KEY_ID,
-    razorpayKeySecret: process.env.RAZORPAY_KEY_SECRET
+    stripePublishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
   });
 
-const order = async (req, res, next) => {
+const createPaymentIntent = async (req, res, next) => {
   try {
-    const razorpay = new Razorpay({
-      key_id: process.env.RAZORPAY_KEY_ID,
-      key_secret: process.env.RAZORPAY_KEY_SECRET
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+    const { amount, currency } = req.body;
+
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: amount, 
+      currency: currency || 'inr',
+      automatic_payment_methods: {
+        enabled: true,
+      },
     });
 
-    const options = req.body;
-
-    const order = await razorpay.orders.create(options);
-
-    if (!order) {
-      res.statusCode = 500;
-      throw new Error('No order');
-    }
-    res.status(201).json(order);
+    res.status(200).send({
+      clientSecret: paymentIntent.client_secret,
+    });
   } catch (error) {
     next(error);
   }
 };
 
-const validate = (req, res) => {
-  const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
-    req.body;
-
-  const generatedSignature = crypto
-    .createHmac('sha256', process.env.RAZORPAY_KEY_SECRET)
-    .update(`${razorpay_order_id}|${razorpay_payment_id}`)
-    .digest('hex');
-  // console.log(generatedSignature, razorpay_signature);
-
-  if (generatedSignature !== razorpay_signature) {
-    res.statusCode = 400;
-    throw new Error('payment is not legit!');
-  }
-  res.status(201).json({
-    id: razorpay_payment_id,
-    status: 'success',
-    message: 'payment is successful',
-    updateTime: new Date().toLocaleTimeString()
-  });
-};
-
-export { config, order, validate };
+export { config, createPaymentIntent };

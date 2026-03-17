@@ -8,15 +8,15 @@ import Footer from './components/Footer';
 
 const App = () => {
   return (
-    <div className='position-relative'>
+    <div className='app-shell'>
       <Header />
-      <main>
-        <Container>
+      <main className='app-main'>
+        <Container fluid='lg'>
           <Outlet />
         </Container>
       </main>
       <Footer />
-      <ToastContainer autoClose={1000} />
+      <ToastContainer position='top-center' autoClose={1200} theme='colored' />
     </div>
   );
 };
