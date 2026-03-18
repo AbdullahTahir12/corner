@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useGetProductsQuery } from '../slices/productsApiSlice';
@@ -39,19 +39,19 @@ const HomePage = () => {
   return (
     <>
       <Meta />
-      <section className='hero mb-5'>
-        <p className='hero__tag'>Fresh arrivals</p>
-        <h1 className='hero__title'>Discover gadgets, essentials, and everyday upgrades</h1>
+            <section className='hero mb-5'>
+        <p className='hero__tag text-uppercase'>Neo Aurora drop</p>
+        <h1 className='hero__title'>Shop the luminous night market</h1>
         <p className='hero__subtitle'>
-          Hand-picked tech and lifestyle gear delivered straight to your doorstep. Transparent pricing,
-          verified reviews, and fast checkout powered by the MERN stack.
+          Curated gadgets, decor, and everyday upgrades bathed in neon. Fast, secure checkout &amp;
+          transparent reviews so you can shop boldly after dark.
         </p>
         <div className='hero__cta'>
           <a href='#products' className='btn-cta primary'>
-            Browse products
+            Explore catalog
           </a>
           <Link to='/cart' className='btn-cta secondary'>
-            View cart
+            Go to cart
           </Link>
         </div>
       </section>
@@ -97,3 +97,4 @@ const HomePage = () => {
 };
 
 export default HomePage;
+

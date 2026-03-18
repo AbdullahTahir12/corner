@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Row, Col, ListGroup, Button, Image, Card } from 'react-bootstrap';
 import {
@@ -134,7 +134,7 @@ const OrderDetailsPage = () => {
       ) : (
         <>
           <h2 className="mb-4 fw-bold text-secondary">
-            Order <span className="text-dark fs-4">#{orderId}</span>
+            Order <span className="text-reset fs-4">#{orderId}</span>
           </h2>
           <Row>
             <Col md={8}>
@@ -188,12 +188,12 @@ const OrderDetailsPage = () => {
                               <Image src={item.image} alt={item.name} fluid rounded className="shadow-sm" />
                             </Col>
                             <Col md={6} xs={9}>
-                              <Link to={`/product/${item._id}`} className='text-decoration-none fw-bold text-dark fs-5'>
+                              <Link to={`/product/${item._id}`} className='text-decoration-none text-reset fw-bold fs-5'>
                                 {item.name}
                               </Link>
                             </Col>
                             <Col md={4} xs={12} className="text-md-end text-start mt-3 mt-md-0 fw-semibold text-secondary">
-                              {item.qty} x {addCurrency(item.price)} = <span className="text-dark">{addCurrency(item.qty * item.price)}</span>
+                              {item.qty} x {addCurrency(item.price)} = <span className="text-reset">{addCurrency(item.qty * item.price)}</span>
                             </Col>
                           </Row>
                         </ListGroup.Item>
@@ -269,3 +269,4 @@ const OrderDetailsPage = () => {
 };
 
 export default OrderDetailsPage;
+

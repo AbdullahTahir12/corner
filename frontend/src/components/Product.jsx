@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -18,34 +18,36 @@ const Product = ({ product }) => {
 
   return (
     <article className='product-card'>
-      <Link to={`/product/${product._id}`}>
-        <img src={product.image} alt={product.name} className='product-card__image mb-3' />
+      <div className='position-relative'>
+        <Link to={`/product/${product._id}`} className='d-block'>
+          <img src={product.image} alt={product.name} className='product-card__image mb-3' />
+        </Link>
+        <span className={`product-card__badge ${inStock ? '' : 'out'}`}>
+          {inStock ? 'In stock' : 'Sold out'}
+        </span>
+      </div>
+      <Link to={`/product/${product._id}`} className='text-decoration-none'>
+        <h3 className='product-title h5 mb-1'>{product.name}</h3>
       </Link>
-      <span className='product-card__badge'>{inStock ? 'In stock' : 'Sold out'}</span>
-      <Link to={`/product/${product._id}`} className='text-dark text-decoration-none'>
-        <h3 className='product-title h5 mb-2'>{product.name}</h3>
-      </Link>
+      <p className='text-muted small mb-2'>{product.brand || 'Corner Store'}</p>
       <div className='mb-2'>
         <Rating value={product.rating} text={`(${product.numReviews} reviews)`} />
       </div>
-      <p className='text-muted small mb-2'>{product.brand || 'Corner Store'}</p>
-      <p className='product-card__price mb-3'>{addCurrency(product.price)}</p>
-      <div className='product-card__actions'>
+      <div className='d-flex justify-content-between align-items-baseline mb-3'>
+        <p className='product-card__price mb-0'>{addCurrency(product.price)}</p>
+        <span className='badge bg-dark text-uppercase'>ships fast</span>
+      </div>
+      <div className='product-card__actions mt-auto'>
         <Button
           variant='warning'
-          className='text-dark fw-semibold'
+          className='fw-semibold'
           type='button'
           disabled={!inStock}
           onClick={addToCartHandler}
         >
           {inStock ? 'Add to Cart' : 'Out of Stock'}
         </Button>
-        <Button
-          as={Link}
-          to={`/product/${product._id}`}
-          variant='outline-dark'
-          className='fw-semibold'
-        >
+        <Button as={Link} to={`/product/${product._id}`} variant='outline-dark' className='fw-semibold'>
           Details
         </Button>
       </div>

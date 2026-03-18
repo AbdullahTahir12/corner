@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Navbar, Nav, Container, Badge, NavDropdown } from 'react-bootstrap';
 import { FaShoppingCart, FaUser } from 'react-icons/fa';
@@ -37,39 +37,39 @@ const Header = () => {
       expand='lg'
       fixed='top'
       collapseOnSelect
-      className='navbar-modern w-100'
+      className='navbar-modern w-100 border-0'
     >
       <Container fluid='lg' className='py-2'>
         <LinkContainer to='/'>
-          <Navbar.Brand className='fw-bold text-uppercase'>
-            <span className='text-warning'>Corner</span> Store
+          <Navbar.Brand className='fw-bold'>
+            <span className='logo-dot' aria-hidden='true'></span>
+            Corner Store
+            <span className='logo-text'>Night Market</span>
           </Navbar.Brand>
         </LinkContainer>
         <Navbar.Toggle aria-controls='main-navbar' />
         <Navbar.Collapse id='main-navbar' className='align-items-center'>
-          <div className='ms-lg-4 me-lg-2 flex-grow-1 mb-3 mb-lg-0'>
+          <div className='ms-lg-4 me-lg-3 flex-grow-1 mb-3 mb-lg-0'>
             <SearchBox />
           </div>
           <Nav className='ms-auto align-items-lg-center gap-1'>
             <LinkContainer to='/cart'>
-              <Nav.Link className='d-flex align-items-center gap-2'>
+              <Nav.Link className='d-flex align-items-center gap-2' aria-label='View shopping cart'>
                 <FaShoppingCart />
                 Cart
                 {cartItemCount > 0 && (
-                  <Badge bg='warning' text='dark' pill>
+                  <Badge bg='warning' pill className='ms-1'>
                     {cartItemCount}
                   </Badge>
                 )}
               </Nav.Link>
             </LinkContainer>
             {userInfo ? (
-              <NavDropdown title={`Hello, ${firstName}`} id='username' align='end'>
+              <NavDropdown title={`Hello, ${firstName}`} id='username' align='end' menuVariant='dark'>
                 <LinkContainer to='/profile'>
                   <NavDropdown.Item>Profile</NavDropdown.Item>
                 </LinkContainer>
-                <NavDropdown.Item onClick={logoutHandler}>
-                  Logout
-                </NavDropdown.Item>
+                <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
               </NavDropdown>
             ) : (
               <LinkContainer to='/login'>
@@ -80,7 +80,7 @@ const Header = () => {
               </LinkContainer>
             )}
             {userInfo?.isAdmin && (
-              <NavDropdown title='Admin' id='adminmenu' align='end'>
+              <NavDropdown title='Admin' id='adminmenu' align='end' menuVariant='dark'>
                 <LinkContainer to='/admin/product-list'>
                   <NavDropdown.Item>Products</NavDropdown.Item>
                 </LinkContainer>

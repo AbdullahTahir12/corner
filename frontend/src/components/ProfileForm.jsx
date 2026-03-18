@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Button, Form, InputGroup } from 'react-bootstrap';
 import { setCredentials } from '../slices/authSlice';
 import { toast } from 'react-toastify';
@@ -48,66 +48,68 @@ const ProfileForm = () => {
     }
   };
   return (
-    <Form onSubmit={submitHandler}>
-      <Form.Group className='mb-3' controlId='name'>
-        <Form.Label>Name</Form.Label>
-        <Form.Control
-          value={name}
-          type='text'
-          placeholder='Enter name'
-          onChange={e => setName(e.target.value)}
-        />
-      </Form.Group>
-      <Form.Group className='mb-3' controlId='email'>
-        <Form.Label>Email address</Form.Label>
-        <Form.Control
-          value={email}
-          type='email'
-          placeholder='Enter email'
-          onChange={e => setEmail(e.target.value)}
-        />
-      </Form.Group>
-      <Form.Group className='mb-3' controlId='password'>
-        <Form.Label>Password</Form.Label>
-        <InputGroup>
+    <div className='form-panel form-panel--compact h-100'>
+      <Form onSubmit={submitHandler}>
+        <Form.Group className='mb-3' controlId='name'>
+          <Form.Label>Name</Form.Label>
           <Form.Control
-            type={showPassword ? 'text' : 'password'}
-            value={password}
-            placeholder='Enter password'
-            onChange={e => setPassword(e.target.value)}
+            value={name}
+            type='text'
+            placeholder='Enter name'
+            onChange={e => setName(e.target.value)}
           />
-          <InputGroup.Text
-            onClick={togglePasswordVisibility}
-            id='togglePasswordVisibility'
-            style={{ cursor: 'pointer' }}
-          >
-            {showPassword ? <FaEye /> : <FaEyeSlash />}
-          </InputGroup.Text>
-        </InputGroup>
-      </Form.Group>
-      <Form.Group className='mb-3' controlId='confirmPassword'>
-        <Form.Label>Confirm Password</Form.Label>
-        <InputGroup>
+        </Form.Group>
+        <Form.Group className='mb-3' controlId='email'>
+          <Form.Label>Email address</Form.Label>
           <Form.Control
-            type={showConfirmPassword ? 'text' : 'password'}
-            value={confirmPassword}
-            placeholder='Confirm password'
-            onChange={e => setConfirmPassword(e.target.value)}
+            value={email}
+            type='email'
+            placeholder='Enter email'
+            onChange={e => setEmail(e.target.value)}
           />
-          <InputGroup.Text
-            onClick={toggleConfirmPasswordVisibility}
-            id='toggleConfirmPasswordVisibility'
-            style={{ cursor: 'pointer' }}
-          >
-            {showConfirmPassword ? <FaEye /> : <FaEyeSlash />}
-          </InputGroup.Text>
-        </InputGroup>
-      </Form.Group>
-      <Button className='mb-3 w-100' variant='warning' type='submit'>
-        Update
-      </Button>
+        </Form.Group>
+        <Form.Group className='mb-3' controlId='password'>
+          <Form.Label>Password</Form.Label>
+          <InputGroup>
+            <Form.Control
+              type={showPassword ? 'text' : 'password'}
+              value={password}
+              placeholder='Enter password'
+              onChange={e => setPassword(e.target.value)}
+            />
+            <InputGroup.Text
+              onClick={togglePasswordVisibility}
+              id='togglePasswordVisibility'
+              style={{ cursor: 'pointer' }}
+            >
+              {showPassword ? <FaEye /> : <FaEyeSlash />}
+            </InputGroup.Text>
+          </InputGroup>
+        </Form.Group>
+        <Form.Group className='mb-3' controlId='confirmPassword'>
+          <Form.Label>Confirm Password</Form.Label>
+          <InputGroup>
+            <Form.Control
+              type={showConfirmPassword ? 'text' : 'password'}
+              value={confirmPassword}
+              placeholder='Confirm password'
+              onChange={e => setConfirmPassword(e.target.value)}
+            />
+            <InputGroup.Text
+              onClick={toggleConfirmPasswordVisibility}
+              id='toggleConfirmPasswordVisibility'
+              style={{ cursor: 'pointer' }}
+            >
+              {showConfirmPassword ? <FaEye /> : <FaEyeSlash />}
+            </InputGroup.Text>
+          </InputGroup>
+        </Form.Group>
+        <Button className='mb-2 w-100' variant='warning' type='submit'>
+          Update
+        </Button>
+      </Form>
       {isUpdateProfileLoading && <Loader />}
-    </Form>
+    </div>
   );
 };
 

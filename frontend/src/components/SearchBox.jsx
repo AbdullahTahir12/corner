@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { FaSearch, FaTimes } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
@@ -19,21 +19,23 @@ function SearchBox() {
   };
 
   return (
-    <Form onSubmit={searchProductHandler} className='search-box w-100'>
+    <Form onSubmit={searchProductHandler} className='search-box w-100' role='search'>
       <Form.Control
         size='sm'
         type='text'
         value={input}
         onChange={event => setInput(event.target.value)}
-        placeholder='Search for products'
-        className='bg-transparent border-0 text-white'
+        placeholder='Search the night market'
+        className='search-box__input flex-grow-1'
+        aria-label='Search products'
       />
       {input && (
         <Button
           type='button'
-          variant='light'
-          className='text-dark border-0 d-flex align-items-center justify-content-center'
+          variant='dark'
+          className='search-box__btn search-box__btn--ghost'
           onClick={clearSearchHandler}
+          aria-label='Clear search'
         >
           <FaTimes />
         </Button>
@@ -41,7 +43,8 @@ function SearchBox() {
       <Button
         type='submit'
         variant='warning'
-        className='text-dark border-0 d-flex align-items-center justify-content-center'
+        className='search-box__btn'
+        aria-label='Submit search'
       >
         <FaSearch />
       </Button>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+﻿import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Row, Col, Button, ListGroup, Card, Image } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
@@ -81,7 +81,7 @@ const PlaceOrderPage = () => {
                       <Col md={6}>
                         <Link
                           to={`/product/${item._id}`}
-                          className='product-title text-dark'
+                          className='product-title text-reset fw-semibold'
                           style={{ textDecoration: 'none' }}
                         >
                           {item.name}
@@ -99,36 +99,29 @@ const PlaceOrderPage = () => {
           </ListGroup>
         </Col>
         <Col md={4}>
-          <Card>
+          <Card className='order-summary-card'>
             <ListGroup variant='flush'>
-              <ListGroup.Item>
+              <ListGroup.Item className='order-summary-card__header'>
+                <p className='text-uppercase text-muted small mb-1'>Review</p>
                 <h2>Order Summary</h2>
               </ListGroup.Item>
-              <ListGroup.Item>
-                <Row>
-                  <Col>Items:</Col>
-                  <Col>{addCurrency(Number(itemsPrice))}</Col>
-                </Row>
+              <ListGroup.Item className='order-summary-card__row'>
+                <span className='order-summary-card__label'>Items</span>
+                <span className='order-summary-card__value'>{addCurrency(Number(itemsPrice))}</span>
               </ListGroup.Item>
-              <ListGroup.Item>
-                <Row>
-                  <Col>Shipping:</Col>
-                  <Col>{addCurrency(Number(shippingPrice))}</Col>
-                </Row>
+              <ListGroup.Item className='order-summary-card__row'>
+                <span className='order-summary-card__label'>Shipping</span>
+                <span className='order-summary-card__value'>{addCurrency(Number(shippingPrice))}</span>
               </ListGroup.Item>
-              <ListGroup.Item>
-                <Row>
-                  <Col>Tax:</Col>
-                  <Col>{addCurrency(Number(taxPrice))}</Col>
-                </Row>
+              <ListGroup.Item className='order-summary-card__row'>
+                <span className='order-summary-card__label'>Tax</span>
+                <span className='order-summary-card__value'>{addCurrency(Number(taxPrice))}</span>
               </ListGroup.Item>
-              <ListGroup.Item>
-                <Row>
-                  <Col>Total:</Col>
-                  <Col>{addCurrency(Number(totalPrice))}</Col>
-                </Row>
+              <ListGroup.Item className='order-summary-card__row order-summary-card__total'>
+                <span className='order-summary-card__label'>Total</span>
+                <span className='order-summary-card__value'>{addCurrency(Number(totalPrice))}</span>
               </ListGroup.Item>
-              <ListGroup.Item>
+              <ListGroup.Item className='border-0 pt-3'>
                 <Button
                   className='w-100'
                   variant='warning'
@@ -147,3 +140,5 @@ const PlaceOrderPage = () => {
 };
 
 export default PlaceOrderPage;
+
+

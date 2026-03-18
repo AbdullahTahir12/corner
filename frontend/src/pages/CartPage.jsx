@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaTrash } from 'react-icons/fa';
@@ -43,7 +43,7 @@ const CartPage = () => {
         <Col md={8}>
           {cartItems.length === 0 && (
             <Message>
-              Your cart is empty 👉 <Link to='/'>Go Back</Link>
+              Your cart is empty. <Link to='/' className='text-reset fw-semibold'>Continue shopping</Link>
             </Message>
           )}
           <ListGroup variant='flush'>
@@ -56,7 +56,7 @@ const CartPage = () => {
                   <Col md={3}>
                     <Link
                       to={`/product/${item._id}`}
-                      className='product-title text-dark'
+                      className='product-title text-reset fw-semibold'
                       style={{ textDecoration: 'none' }}
                     >
                       {item.name}
@@ -129,3 +129,5 @@ const CartPage = () => {
 };
 
 export default CartPage;
+
+
